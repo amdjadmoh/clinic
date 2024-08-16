@@ -4,7 +4,9 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 const usersroutes = require('./routes/users');
 const doctorsroutes = require('./routes/doctors');
-deproutes=require('./routes/deps');
+const patientroutes = require('./routes/patient');
+const deproutes=require('./routes/deps');
+const queueroutes = require('./routes/queue');
 const globalErrorHandler = require('./controller/errorController');
 const app = express();
 
@@ -18,6 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/users',usersroutes);
 app.use('/doctors',doctorsroutes);
 app.use('/dep',deproutes);
+app.use('/patient',patientroutes);
+app.use('/queue',queueroutes);
 
 app.use(globalErrorHandler);
 
