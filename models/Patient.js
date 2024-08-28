@@ -1,6 +1,7 @@
 const db= require('../config/database');
 const { Sequelize } = require('sequelize');
 
+
 const Patient = db.define('patient',{
     name:{
         type:Sequelize.STRING,
@@ -30,5 +31,6 @@ const Patient = db.define('patient',{
     tableName:'patients',
     timestamps:false,
 });
+
 
 module.exports= Patient;

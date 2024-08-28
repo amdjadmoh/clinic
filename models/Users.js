@@ -1,4 +1,5 @@
 const sequelize = require('sequelize');
+const Doctor = require('./Doctors');
 const bcrypt = require('bcrypt');
 const db = require('../config/database');
 
@@ -38,4 +39,5 @@ const User = db.define('user', {
   },
 });
 
+User.belongsTo(Doctor, { foreignKey: 'userID' });
 module.exports = User;

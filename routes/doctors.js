@@ -7,7 +7,9 @@ router
 .route('/')
 .get(doctorsController.getAllDoctors)
 .post(doctorsController.createDoctor);
-
+router 
+.route('/search')
+.get(doctorsController.searchDoctor);
 router
 .route('/:id')
 .get(doctorsController.getDoctor)

@@ -1,7 +1,22 @@
 const Dep=require('../models/Dep');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const { Op } = require('sequelize');
 
+exports.searchDep = catchAsync(async (req, res, next) => {
+    const deps = await Dep.findAll({
+        where: {
+           depName:{ [Op.like]: `%${req.query.name}%`},
+        },
+    });
+    res.status(200).json({
+        status: 'success',
+        data: {
+        deps,
+        },
+    });
+    }
+);
 exports.getAllDeps = catchAsync(async (req, res, next) => {
     const deps = await Dep.findAll();
     res.status(200).json({

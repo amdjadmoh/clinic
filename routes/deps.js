@@ -8,6 +8,9 @@ router
     .post(depController.createDep);
 
 router
+    .route('/search')
+    .get(depController.searchDep);    
+router
     .route('/:id')
     .get(depController.getDep)
     .patch(depController.updateDep)

@@ -2,6 +2,22 @@ const Doctors = require("../models/Doctors");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const sequelize = require("sequelize");
+const { Op } = require("sequelize");
+
+exports.searchDoctor = catchAsync(async (req, res, next) => {
+  const doctors = await Doctors.findAll({
+    where: {
+      name: { [Op.like]: `%${req.query.name}%` },
+    },
+  });
+  res.status(200).json({
+    status: "success",
+    data: {
+      doctors,
+    },
+  });
+});
+
 
 exports.getAllDoctors = catchAsync(async (req, res, next) => {
   const doctors = await Doctors.findAll();

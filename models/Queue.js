@@ -1,4 +1,7 @@
 const db = require('../config/database');
+const Patient = require('./Patient');
+const Doctor = require('./Doctors');
+const Dep = require('./Dep');
 const { Sequelize } = require('sequelize');
 
 const Queue = db.define('queue', {
@@ -26,10 +29,25 @@ const Queue = db.define('queue', {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-
+    date: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW,
+        validate: {
+            isDate: true,
+        }
+    }
 }, {
     tableName: 'queues',
     timestamps: true,
 });
 
+Queue.belongsTo(Dep, { foreignKey: 'depID' });
+Queue.belongsTo(Patient, { foreignKey: 'patientID' });
+Queue.addScope('defaultScope', {
+    include: {
+        model: Patient,
+        attributes: ['name']
+    }
+});
 module.exports = Queue;
