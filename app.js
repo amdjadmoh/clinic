@@ -13,6 +13,10 @@ const prescriptionroutes = require('./routes/prescription');
 const medicineRoutes = require('./routes/medicine');
 const prescriptionDetailsRoutes=require('./routes/prescriptionDetails');
 const globalErrorHandler = require('./controller/errorController');
+const ChronicDiseasesRoutes = require('./routes/chronicDiseases');
+const PreDefinedProcedureRoutes = require('./routes/PreDefinedProcedure');
+const InvoiceRoutes = require('./routes/Invoice');
+const ProcedureRoutes = require('./routes/patientProcedure');
 const app = express();
 
 // Middleware to parse JSON bodies
@@ -22,7 +26,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // Database
 
-app.use('/users',usersroutes);
+app.use('/getfile', express.static(path.join(__dirname, 'results')));
+
+// Handle dynamic file requests
+app.get('/getfile/:file', (req, res) => {
+    const fileName = req.params.file;
+    const filePath = path.join(__dirname, 'results', fileName);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).send('File not found');
+        }
+    });
+});app.use('/users',usersroutes);
 app.use('/doctors',doctorsroutes);
 app.use('/dep',deproutes);
 app.use('/patient',patientroutes);
@@ -32,6 +47,12 @@ app.use('/medicalRecord',medicalRecordroutes);
 app.use('/prescription',prescriptionroutes);
 app.use('/medicine',medicineRoutes);
 app.use('/prescriptionDetails',prescriptionDetailsRoutes);
+app.use('/chronicDiseases', ChronicDiseasesRoutes);
+app.use('/preDefinedProcedure', PreDefinedProcedureRoutes);  
+app.use('/invoices', InvoiceRoutes);
+app.use('/procedure',ProcedureRoutes);
+app.use('/resultType',require('./routes/resultType'));
+app.use('/result',require('./routes/results'));
     
 // Catch-all route for undefined routes
 app.use((req, res, next) => {

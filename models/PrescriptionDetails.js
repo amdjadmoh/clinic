@@ -30,7 +30,7 @@ PrescriptionDetails.addScope('defaultScope', {
     include: [
         {
             model: Medicine,
-            attributes: ['name']
+            attributes: ['medicineName']
         }
     ]
 });

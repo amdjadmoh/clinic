@@ -1,5 +1,5 @@
-// // const { Sequelize } = require('sequelize');
-// // module.exports = new Sequelize('postgres://postgres:admin@localhost:5432/clinic') 
+// const { Sequelize } = require('sequelize');
+// module.exports = new Sequelize('postgres://postgres:admin@localhost:5432/clinic') 
 // const { Sequelize } = require('sequelize');
 
 // // Example connection string with SQL authentication
