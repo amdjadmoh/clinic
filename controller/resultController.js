@@ -102,6 +102,23 @@ exports.getResultByPatient = catchAsync(async (req, res, next) => {
 }
 );
 
+exports.getResultByPatientAndType = catchAsync(async (req, res, next) => {
+    const results = await result.findAll({
+        where: {
+            patientID: req.params.patientID,
+            resultTypeID: req.params.resultTypeID
+        }
+    });
+    res.status(200).json({
+        status: 'success',
+        data: {
+            results
+        }
+    });
+}
+);
+
+
 
 
 

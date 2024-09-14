@@ -12,5 +12,6 @@ router.patch('/:id', resultController.updateResult);
 router.delete('/:id', resultController.deleteResult);
 router.get('/type/:resultTypeID', resultController.getResultByType);
 router.get('/patient/:patientID', resultController.getResultByPatient);
+router.get('/patient/:patientID/type/:resultTypeID', resultController.getResultByPatientAndType);
 
 module.exports = router;

@@ -1,5 +1,5 @@
-// const { Sequelize } = require('sequelize');
-// module.exports = new Sequelize('postgres://postgres:admin@localhost:5432/clinic') 
+const { Sequelize } = require('sequelize');
+module.exports = new Sequelize('postgres://postgres:admin@localhost:5432/clinic') 
 // const { Sequelize } = require('sequelize');
 
 // // Example connection string with SQL authentication
@@ -9,22 +9,22 @@
 
 
 
-const { Sequelize } = require('sequelize');
+// const { Sequelize } = require('sequelize');
 
-const db = new Sequelize('clinic', 'clinic', 'amgedamged2004@', {
-    host: 'clinicapi.database.windows.net',
-    dialect: 'mssql',
-    dialectOptions: {
-        options: {
-            encrypt: true, // Use this if you're on Windows Azure
-            requestTimeout: 30000, // Increase timeout to 30 seconds
-        }
-    },
-    pool: {
-        max: 5,
-        min: 0,
-        idle: 10000
-    }
-});
+// const db = new Sequelize('clinicoum', 'clinic', 'amgedamged2004@', {
+//     host: 'clinicoum.database.windows.net',
+//     dialect: 'mssql',
+//     dialectOptions: {
+//         options: {
+//             encrypt: true, // Use this if you're on Windows Azure
+//             requestTimeout: 30000, // Increase timeout to 30 seconds
+//         }
+//     },
+//     pool: {
+//         max: 5,
+//         min: 0,
+//         idle: 10000
+//     }
+// });
 
-module.exports = db;
+// module.exports = db;

@@ -84,3 +84,51 @@ exports.deleteDep= catchAsync(
         });
     }
 );
+
+exports.getDepProcedures= catchAsync(
+    async (req,res,next)=>{
+        const dep = await Dep.findByPk(req.params.id);
+        if(!dep){
+            return next(new AppError('Department not found',404));
+        }
+        const procedures= await dep.getPredefinedprocedure();
+        res.status(200).json({
+            status:'success',
+            data:{
+                procedures,
+            },
+        });
+    }
+);
+
+exports.addDepProcedure= catchAsync(
+    async (req,res,next)=>{
+        const dep = await Dep.findByPk(req.params.id);
+        if(!dep){
+            return next(new AppError('Department not found',404));
+        }
+        dep.defaultProcedure=req.body.defaultProcedureID;
+        await dep.save();
+
+        res.status(200).json({
+            status:'success',
+            data:dep
+        });
+    }
+);
+
+exports.removeDepProcedure= catchAsync(
+    async (req,res,next)=>{
+        const dep = await Dep.findByPk(req.params.id);
+        if(!dep){
+            return next(new AppError('Department not found',404));
+        }
+        await dep.removePreDefinedProcedure(req.body.procedureId);
+        res.status(200).json({
+            status:'success',
+            data:null,
+        });
+    }
+);
+
+

@@ -10,6 +10,13 @@ router
 router
     .route('/search')
     .get(depController.searchDep);    
+
+router
+.route('/defaultProcedure/:id')
+.get(depController.getDepProcedures)
+.post(depController.addDepProcedure)
+.delete(depController.removeDepProcedure);
+
 router
     .route('/:id')
     .get(depController.getDep)

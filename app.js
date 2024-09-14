@@ -17,8 +17,10 @@ const ChronicDiseasesRoutes = require('./routes/chronicDiseases');
 const PreDefinedProcedureRoutes = require('./routes/PreDefinedProcedure');
 const InvoiceRoutes = require('./routes/Invoice');
 const ProcedureRoutes = require('./routes/patientProcedure');
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
 // Middleware to parse JSON bodies
 app.use(express.json());
 
@@ -29,7 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/getfile', express.static(path.join(__dirname, 'results')));
 
 // Handle dynamic file requests
-app.get('/getfile/:file', (req, res) => {
+app.get('/getfile/results/:file', (req, res) => {
     const fileName = req.params.file;
     const filePath = path.join(__dirname, 'results', fileName);
     res.sendFile(filePath, (err) => {
